@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
 def templatePath = 'https://raw.githubusercontent.com/sclorg/httpd-ex/master/openshift/templates/httpd.json' 
-def templateName = 'Frontend'
+def templateName = 'httpd-example'
 
 pipeline {
     agent {
