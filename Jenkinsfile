@@ -5,7 +5,9 @@ def templateName = 'frontend'
 
 pipeline {
     agent {
-        any
+        node {
+            any
+        }
     }
 
     options {
