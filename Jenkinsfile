@@ -4,7 +4,11 @@ def templatePath = 'https://raw.githubusercontent.com/DerBrecher/frontend-builde
 def templateName = 'frontend'
 
 pipeline {
-    agent any
+    agent {
+        node {
+            label 'base'
+        }
+    }
 
     options {
         timeout(time: 20, unit: 'MINUTES') 
