@@ -4,7 +4,12 @@ def templatePath = 'https://raw.githubusercontent.com/DerBrecher/frontend-builde
 def templateName = 'frontend'
 
 pipeline {
-    agent any
+    agent {
+        docker{
+            image 'openshift/jenkins-slave-base-centos7'
+        }
+
+    }
 
     options {
         timeout(time: 20, unit: 'MINUTES') 
