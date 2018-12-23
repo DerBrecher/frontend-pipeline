@@ -4,12 +4,7 @@ def templatePath = 'https://raw.githubusercontent.com/DerBrecher/frontend-builde
 def templateName = 'frontend'
 
 pipeline {
-    agent {
-        docker{
-            image 'openshift/jenkins-slave-base-centos7'
-        }
-
-    }
+    agent any
 
     options {
         timeout(time: 20, unit: 'MINUTES') 
@@ -38,6 +33,7 @@ pipeline {
                             if (openshift.selector("secrets", templateName).exists()) { 
                                openshift.selector("secrets", templateName).delete()                            
                             }
+                            sh 'ls'
                         }
                     }
                 }
