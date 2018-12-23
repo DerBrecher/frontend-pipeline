@@ -1,13 +1,14 @@
 #!/usr/bin/env groovy
 
-def templatePath = 'https://raw.githubusercontent.com/sclorg/httpd-ex/master/openshift/templates/httpd.json' 
-def templateName = 'Frontend'
+def templatePath = 'https://raw.githubusercontent.com/DerBrecher/frontend-builder/master/template.json' 
+def templateName = 'frontend'
 
 pipeline {
     agent {
-        node {
-            label 'nodejs'
+        docker{
+            image 'openshift/jenkins-slave-base-centos7'
         }
+
     }
 
     options {
@@ -21,6 +22,7 @@ pipeline {
                     openshift.withCluster() {
                         openshift.withProject() {
                             echo "Using project: ${openshift.project()}"
+                            echo "On ClusterURL: ${openshift.cluster()}"
                         }
                     }
                 }
@@ -31,9 +33,10 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
+                            echo 'Cleaning up'
                             openshift.selector("all", [ template : templateName ]).delete() 
                             if (openshift.selector("secrets", templateName).exists()) { 
-                                openshift.selector("secrets", templateName).delete()
+                               openshift.selector("secrets", templateName).delete()                            
                             }
                         }
                     }
