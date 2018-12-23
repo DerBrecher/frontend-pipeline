@@ -6,7 +6,9 @@ metadata:
 spec:
   source:
     git:
-      uri: "https://github.com/DerBrecher/frontend-pipeline"
+      uri: "https://git-codecommit.eu-central-1.amazonaws.com/v1/repos/trackntrace-Frontend"
+    sourceSecret:
+      name: "aws"
   strategy:
     jenkinsPipelineStrategy:
       jenkinsfilePath: Jenkinsfile
